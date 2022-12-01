@@ -98,7 +98,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0b99d4bad7e58e4f9adc899bbed7a1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _sr: {fileID: 4501344078962521490}
   _fishMove: {fileID: -2241825655046919614}
+  _tag: 0
 --- !u!114 &-2241825655046919614
 MonoBehaviour:
   m_ObjectHideFlags: 0

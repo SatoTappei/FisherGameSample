@@ -26,6 +26,8 @@ public class FishMove : MonoBehaviour
         // ターゲットの方を向かせる
         Vector3 dir = target.position - transform.position;
         transform.rotation = Quaternion.FromToRotation(Vector3.up, dir);
+        Vector3 rot = transform.eulerAngles;
+        transform.eulerAngles = new Vector3(rot.x, rot.y, rot.z - 90);
 
         yield return transform.DOMove(target.position, speed).WaitForCompletion();
     }

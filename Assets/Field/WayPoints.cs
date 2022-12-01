@@ -11,17 +11,17 @@ using System.Linq;
 class WayPoints
 {
     /// <summary>画面中央の座標のリスト</summary>
-    static List<Transform> _cpList;
+    List<Transform> _cpList;
     /// <summary>画面外の座標のリスト</summary>
-    static List<Transform> _epList;
+    List<Transform> _epList;
 
-    static WayPoints()
+    public WayPoints()
     {
         _cpList = GameObject.FindGameObjectsWithTag("CenterPoint").Select(g => g.transform).ToList();
         _epList = GameObject.FindGameObjectsWithTag("EscapePoint").Select(g => g.transform).ToList();
     }
 
     // 指定したリストの中からランダムに取得してくる
-    public static Transform GetCenterPointRandom() => _cpList[Random.Range(0, _cpList.Count)];
-    public static Transform GetEscapePointRandom() => _epList[Random.Range(0, _epList.Count)];
+    public Transform GetCenterPointRandom() => _cpList[Random.Range(0, _cpList.Count)];
+    public Transform GetEscapePointRandom() => _epList[Random.Range(0, _epList.Count)];
 }
