@@ -32,5 +32,10 @@ public class FishUnit : MonoBehaviour
         // 向かう座標を取得する
         _centerPoint = WayPoints.GetCenterPointRandom();
         _escapePoint = WayPoints.GetEscapePointRandom();
+
+        // TODO
+        // SOを取得してくる
+        // 画像をSO内の魚の画像に差し替え
+        // SOへの参照をパラメータとして保持
     }
 }
