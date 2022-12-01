@@ -8,11 +8,23 @@ using UnityEngine;
 public class InGameStream : MonoBehaviour
 {
     [SerializeField] TitleStream _titleStream;
+    [SerializeField] GameStartEffect _gameStartEffect;
+    [SerializeField] GameOverEffect _gameOverEffect;
 
     IEnumerator Start()
     {
-        yield return _titleStream.Stream();
+        // タイトル画面
+        _titleStream.Init();
+        yield return _titleStream.StreamCoroutine();
+        // ゲームスタート！
+        _gameStartEffect.Init();
+        yield return _gameStartEffect.StreamCoroutine();
 
+        // ゲーム中
+
+        // ゲームオーバー
+        _gameOverEffect.Init();
+        yield return _gameOverEffect.StreamCoroutine();
     }
 
     void Update()
