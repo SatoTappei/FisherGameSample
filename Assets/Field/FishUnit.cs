@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 魚単体を制御する
+/// 魚の各コンポーネントを制御する
 /// </summary>
 public class FishUnit : MonoBehaviour
 {
+    [SerializeField] FishMove _fishMove;
+
     Transform _centerPoint;
     Transform _escapePoint;
 
