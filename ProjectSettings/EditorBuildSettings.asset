@@ -8,4 +8,5 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/@Merge/InGame.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 7bf19fd04144c904193b1412739e8998, type: 2}
