@@ -20,7 +20,7 @@ public class Generator : MonoBehaviour
 
         while (IsActive)
         {
-            // 生成もしくはオブジェクトプールから取る
+            Instantiate(_prefabs, transform.position, Quaternion.identity);
             yield return new WaitForSeconds(_distance);
         }
         Debug.Log("ジェネレータ停止");
