@@ -12,9 +12,14 @@ public class FishUnit : MonoBehaviour
     Transform _centerPoint;
     Transform _escapePoint;
 
-    void Start()
+    IEnumerator Start()
     {
         Init();
+
+        // ‰æ–Ê’†‰›‚ÉŒü‚¯‚ÄˆÚ“®‚·‚é
+        yield return _fishMove.MoveTo(_centerPoint, 0.5f);
+        // ‰æ–ÊŠO‚É“¦‚°‚é
+        yield return _fishMove.MoveTo(_escapePoint, 0.5f);
     }
 
     void Update()
@@ -27,9 +32,5 @@ public class FishUnit : MonoBehaviour
         // Œü‚©‚¤À•W‚ğæ“¾‚·‚é
         _centerPoint = WayPoints.GetCenterPointRandom();
         _escapePoint = WayPoints.GetEscapePointRandom();
-
-        // ‰æ–Ê’†‰›‚ÉŒü‚¯‚ÄˆÚ“®‚·‚é
-        // ‰æ–Ê’†‰›‚É‚µ‚Î‚ç‚­•Y‚¤
-        // ‰æ–ÊŠO‚É“¦‚°‚é
     }
 }
