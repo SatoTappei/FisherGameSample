@@ -34,6 +34,10 @@ public class PlayerController : MonoBehaviour
 
             yield return new WaitUntil(() => go == null);
 
+            // ゲージ作成
+            // 0になったときのコールバックと1になったときのコールバックを登録する
+            // UnityEvent…ボタンのやつとか使えないか検討
+
             //t.Kill();
             Debug.Log("浮きが消えました");
         }
