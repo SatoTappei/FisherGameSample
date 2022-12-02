@@ -8,7 +8,7 @@ using UnityEngine.AddressableAssets;
 /// <summary>
 /// 魚の各コンポーネントを制御する
 /// </summary>
-public class FishUnit : MonoBehaviour
+public class FishUnit : MonoBehaviour , IFloatHitable
 {
     [SerializeField] SpriteRenderer _sr;
     [SerializeField] FishMove _fishMove;
@@ -27,6 +27,9 @@ public class FishUnit : MonoBehaviour
 
     IEnumerator Start()
     {
+        if (_sr == null || _fishMove == null)
+            yield break;
+
         // 周期がズレるので共通で使うフィールドをセットするだけで消す
         // TODO:無駄が多い処理
         if (_wayPoints == null || _dataBase == null)
@@ -76,5 +79,12 @@ public class FishUnit : MonoBehaviour
         _sr.sprite = status.so.Sprite;
 
         return status;
+    }
+
+    public void HitReceived()
+    {
+        Debug.Log("ヒットしました");
+        // ヒットした際の処理を書く
+        // キャラが釣りバトルする際のアニメーションみたいなの
     }
 }
