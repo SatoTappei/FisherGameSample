@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// マウスに追従するカーソル
+/// マウスに追従するカーソルのコンポーネント
 /// </summary>
 public class FloatCursor : MonoBehaviour
 {
-    [SerializeField] Camera _camera;
     [Header("インスペクター上のTransformの値で設定する")]
     [SerializeField] Vector2 _leftUp;
     [SerializeField] Vector2 _rightBottom;
+
+    Camera _camera;
 
     void Start()
     {
@@ -18,6 +19,12 @@ public class FloatCursor : MonoBehaviour
     }
 
     void Update()
+    {
+        Set();
+    }
+
+    /// <summary>マウスカーソルの位置にセットする</summary>
+    void Set()
     {
         Vector3 pos = _camera.ScreenToWorldPoint(Input.mousePosition);
         pos.z = 0;
