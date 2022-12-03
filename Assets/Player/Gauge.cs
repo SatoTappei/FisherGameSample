@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 /// <summary>
@@ -11,6 +12,16 @@ public class Gauge : MonoBehaviour
     [SerializeField] Transform _damage;
 
     float _currentValue;
+
+    // 釣りバトルの決着が着いたタイミングで呼ばれるコールバック
+    public UnityAction OnWin;
+    public UnityAction OnLose;
+
+    void Awake()
+    {
+        // 任意のタイミングで表示させ、コルーチンを開始したいので生成時は非表示にしておく
+        gameObject.SetActive(false);
+    }
 
     IEnumerator Start()
     {
@@ -26,11 +37,11 @@ public class Gauge : MonoBehaviour
             // 結果によって呼ぶコールバックを変える
             if (_currentValue <= 0)
             {
-                Debug.Log("まけ");
+                OnLose.Invoke();
             }
             else if (_currentValue >= 1)
             {
-                Debug.Log("かち");
+                OnWin.Invoke();
             }
 
             // 次のバトル時にリセットする

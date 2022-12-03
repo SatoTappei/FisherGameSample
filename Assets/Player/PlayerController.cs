@@ -8,6 +8,7 @@ using DG.Tweening;
 /// </summary>
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] Gauge _gauge;
     [SerializeField] GameObject _floatPrefab;
     [SerializeField] Transform _floatPivot;
 
@@ -17,13 +18,21 @@ public class PlayerController : MonoBehaviour
     {
         Init();
 
+        // 浮き輪を生成して非表示にしておく
+        GameObject go = Instantiate(_floatPrefab, _floatPivot.position, Quaternion.identity);
+        go.SetActive(false);
+        // 浮き輪が魚に当たった時に呼ばれる追加の処理としてゲージの表示を追加する
+        go.GetComponent<FloatPrefab>().OnHited += () => _gauge.gameObject.SetActive(true);
+
+        _gauge.OnWin += () => Debug.Log("かちました");
+        _gauge.OnLose += () => Debug.Log("まけました");
+
         while (true)
         {
-            // マウスの位置に浮きを投げる
+            // マウスクリックされたら浮き輪を表示させる
+            // 表示されると浮き輪はマウスの位置に動くようになっている
             yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
-
-            // 生成
-            GameObject go = Instantiate(_floatPrefab, _floatPivot.position, Quaternion.identity);
+            go.SetActive(true);
 
             //Vector3 pos = _camera.ScreenToWorldPoint(Input.mousePosition);
             //pos.z = 0;
@@ -32,11 +41,16 @@ public class PlayerController : MonoBehaviour
             //Tween t = go.transform.DOMove(pos, 0.5f);
             // 指定位置まで来たらコライダーをオンにする
 
-            yield return new WaitUntil(() => go == null);
+            // バトルの決着がついたタイミングで浮きが消えるのでここで待つ
+            yield return new WaitUntil(() => !go.activeInHierarchy);
 
             // ゲージ作成
             // 0になったときのコールバックと1になったときのコールバックを登録する
             // UnityEvent…ボタンのやつとか使えないか検討
+
+            // TODO:バトルの流れ
+            // 魚にヒットしたらゲージを表示したい
+            // バトルが終わったらゲージを非表示にしたい
 
             //t.Kill();
             Debug.Log("浮きが消えました");
