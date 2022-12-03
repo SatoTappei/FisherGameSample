@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4501344078962521491}
   - component: {fileID: 4501344078962521490}
+  - component: {fileID: -6826847921904691498}
   - component: {fileID: 4802934080970342646}
   - component: {fileID: -2241825655046919614}
   m_Layer: 0
@@ -86,6 +87,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!58 &-6826847921904691498
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4501344078962521517}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.25
 --- !u!114 &4802934080970342646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,7 +117,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sr: {fileID: 4501344078962521490}
   _fishMove: {fileID: -2241825655046919614}
-  _tag: 0
 --- !u!114 &-2241825655046919614
 MonoBehaviour:
   m_ObjectHideFlags: 0
