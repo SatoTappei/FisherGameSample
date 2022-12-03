@@ -34,6 +34,7 @@ public class FishUnit : MonoBehaviour , IFloatHitable
         {
             yield return SetStaticFieldCoroutine();
             _isInited = true;
+            gameObject.SetActive(false);
         }
         else
         {
@@ -50,11 +51,8 @@ public class FishUnit : MonoBehaviour , IFloatHitable
             // 漂う
             yield return new WaitForSeconds(status.so.WaitTime);
             // 画面外に逃げる
-            yield return _fishMove.MoveTo(status.escape, status.so.Speed);
+            yield return _fishMove.MoveTo(status.escape, status.so.Speed, ()=> gameObject.SetActive(false));
         }
-
-        // TODO:非表示にしてオブジェクトプールに流用できるようにしておく
-        gameObject.SetActive(false);
     }
 
     void Update()
