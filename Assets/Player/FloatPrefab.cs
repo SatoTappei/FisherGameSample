@@ -12,11 +12,14 @@ public class FloatPrefab : MonoBehaviour
 {
     [SerializeField] Collider2D _col;
 
-    Tween _tween;
+    Sequence _sequence;
     /// <summary>
     /// 表示非表示で使いまわすので生成された位置をデフォルトの位置として保持しておく
     /// </summary>
     Vector3 _defaultPos;
+
+    /// <summary>魚に当たった際には浮きを消せないようにする</summary>
+    bool _isHit;
 
     /// <summary>浮き輪が魚に当たったときに呼ばれる追加の処理</summary>
     public UnityAction OnHited;
@@ -33,14 +36,16 @@ public class FloatPrefab : MonoBehaviour
 
     void OnDisable()
     {
-        _tween.Kill();
+        _sequence.Kill();
         transform.position = _defaultPos;
+        _isHit = false;
     }
 
     void Update()
     {
-        // テスト用
-        if (Input.GetKeyDown(KeyCode.D)) gameObject.SetActive(false);
+        // 右クリックで消すことが出来る
+        if (Input.GetMouseButtonDown(1) && !_isHit)
+            gameObject.SetActive(false);
     }
 
     /// <summary>マウスカーソルの位置に移動させる</summary>
@@ -48,13 +53,19 @@ public class FloatPrefab : MonoBehaviour
     {
         Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         pos.z = 0;
-        _tween = transform.DOMove(pos, 0.5f);
+        _sequence = DOTween.Sequence()
+                    .Append(transform.DOMove(pos, 0.5f))
+                    .AppendCallback(() => _col.enabled = true);
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        if (_isHit) return;
+
         // 2匹以上ヒットしないように判定を消す
         _col.enabled = false;
+        Debug.Log("ヒット");
+        _isHit = true;
 
         ExecuteEvents.Execute<IFloatHitable>(collision.gameObject, null, (reciever, _) =>
         {
@@ -65,6 +76,6 @@ public class FloatPrefab : MonoBehaviour
 
     void OnDestroy()
     {
-        _tween.Kill();
+        _sequence.Kill();
     }
 }

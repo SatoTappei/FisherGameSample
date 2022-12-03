@@ -24,8 +24,20 @@ public class PlayerController : MonoBehaviour
         // •‚‚«—Ö‚ª‹›‚É“–‚½‚Á‚½‚ÉŒÄ‚Î‚ê‚é’Ç‰Á‚Ìˆ—‚Æ‚µ‚ÄƒQ[ƒW‚Ì•\¦‚ğ’Ç‰Á‚·‚é
         go.GetComponent<FloatPrefab>().OnHited += () => _gauge.gameObject.SetActive(true);
 
-        _gauge.OnWin += GaugeWin;
-        _gauge.OnLose += GaugeLose;
+        _gauge.OnWin += () =>
+        {
+            FieldManager fm = new FieldManager();
+            fm.GetCapture().Fished();
+            go.SetActive(false);
+            _gauge.gameObject.SetActive(false);
+        };
+        _gauge.OnLose += () =>
+        {
+            FieldManager fm = new FieldManager();
+            fm.GetCapture().Escape();
+            go.SetActive(false);
+            _gauge.gameObject.SetActive(false);
+        };
 
         while (true)
         {
@@ -56,17 +68,5 @@ public class PlayerController : MonoBehaviour
     void Init()
     {
         _camera = Camera.main;
-    }
-
-    void GaugeWin()
-    {
-        FieldManager fm = new FieldManager();
-        fm.GetCapture().Fished();
-    }
-
-    void GaugeLose()
-    {
-        FieldManager fm = new FieldManager();
-        fm.GetCapture().Escape();
     }
 }

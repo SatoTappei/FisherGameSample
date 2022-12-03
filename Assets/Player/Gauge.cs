@@ -17,36 +17,42 @@ public class Gauge : MonoBehaviour
     public UnityAction OnWin;
     public UnityAction OnLose;
 
+    Coroutine _coroutine;
+
     void Awake()
     {
         // 任意のタイミングで表示させ、コルーチンを開始したいので生成時は非表示にしておく
         gameObject.SetActive(false);
     }
 
-    IEnumerator Start()
+    void OnEnable()
     {
-        while (true)
+        _coroutine = StartCoroutine(Stream());
+    }
+
+    void OnDisable()
+    {
+        if (_coroutine != null) 
+            StopCoroutine(_coroutine);
+    }
+
+    IEnumerator Stream()
+    {
+        // 初期値を設定
+        _currentValue = 0.5f;
+
+        // ゲージが0もしくは1になるまで待つ
+        // この間のゲージの増減はUpdateで行う
+        yield return new WaitUntil(() => Check01());
+
+        // 結果によって呼ぶコールバックを変える
+        if (_currentValue <= 0)
         {
-            // 初期値を設定
-            _currentValue = 0.5f;
-
-            // ゲージが0もしくは1になるまで待つ
-            // この間のゲージの増減はUpdateで行う
-            yield return new WaitUntil(() => Check01());
-
-            // 結果によって呼ぶコールバックを変える
-            if (_currentValue <= 0)
-            {
-                OnLose.Invoke();
-            }
-            else if (_currentValue >= 1)
-            {
-                OnWin.Invoke();
-            }
-
-            // 次のバトル時にリセットする
-            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.R));
-            Debug.Log("リセットシマス");
+            OnLose.Invoke();
+        }
+        else if (_currentValue >= 1)
+        {
+            OnWin.Invoke();
         }
     }
 
