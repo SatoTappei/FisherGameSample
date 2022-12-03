@@ -97,7 +97,13 @@ public class FishUnit : MonoBehaviour , IFloatHitable
     public void Fished()
     {
         StartCoroutine(_fishMove.Fished());
+        IsCapture = false;
+    }
 
+    /// <summary>“¦‚°‚ç‚ê‚½Û‚ÉŒÄ‚Î‚ê‚éˆ—</summary>
+    public void Escape()
+    {
+        StartCoroutine(_fishMove.Escape());
         IsCapture = false;
     }
 
@@ -105,7 +111,6 @@ public class FishUnit : MonoBehaviour , IFloatHitable
     {
         // ƒqƒbƒg‚µ‚½Û‚É‚Ò‚¿‚Ò‚¿‚³‚¹‚é
         StartCoroutine(_fishMove.Captured());
-
         IsCapture = true;
     }
 }
