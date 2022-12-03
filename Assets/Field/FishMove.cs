@@ -8,7 +8,7 @@ using DG.Tweening;
 /// </summary>
 public class FishMove : MonoBehaviour
 {
-    Sequence _seq;
+    Tween _tween;
 
     void Start()
     {
@@ -29,6 +29,20 @@ public class FishMove : MonoBehaviour
         Vector3 rot = transform.eulerAngles;
         transform.eulerAngles = new Vector3(rot.x, rot.y, rot.z - 90);
 
-        yield return transform.DOMove(target.position, speed).WaitForCompletion();
+        _tween = transform.DOMove(target.position, speed);
+
+        yield return _tween.WaitForCompletion();
+    }
+
+    /// <summary>ぴちぴちさせる</summary>
+    public IEnumerator Captured()
+    {
+        // トゥウィーン中ならKillする
+        if (_tween != null) _tween.Kill();
+
+        _tween = transform.DOShakePosition(99, 1, 10).SetLoops(-1);
+
+        // 後の拡張に対応できるように1フレームの待機を行う
+        yield return null;
     }
 }
