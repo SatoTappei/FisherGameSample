@@ -29,10 +29,10 @@ public class InGameStream : MonoBehaviour
         // ゲーム中
 
         // ジェネレータを停止させる
-        foreach (Generator gen in _generators)
-        {
-            gen.IsActive = false;
-        }
+        //foreach (Generator gen in _generators)
+        //{
+        //    gen.IsActive = false;
+        //}
         // ゲームオーバー
         _gameOverEffect.Init();
         yield return _gameOverEffect.StreamCoroutine();
