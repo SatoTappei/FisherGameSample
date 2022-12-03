@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CenterPoint
   - EscapePoint
+  - FishedPivot
   layers:
   - Default
   - TransparentFX
