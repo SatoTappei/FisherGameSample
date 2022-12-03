@@ -60,7 +60,7 @@ public class FishUnit : MonoBehaviour , IFloatHitable
             // •Y‚¤
             yield return new WaitForSeconds(status.so.WaitTime);
             // ‰æ–ÊŠO‚É“¦‚°‚é
-            yield return _fishMove.MoveTo(status.escape, status.so.Speed, ()=> gameObject.SetActive(false));
+            yield return _fishMove.MoveTo(status.escape, status.so.Speed);
         }
     }
 

@@ -27,7 +27,7 @@ public class FishMove : MonoBehaviour
     }
 
     /// <summary>DotWeenで目標まで移動させる</summary>
-    public IEnumerator MoveTo(Transform target, float speed, UnityAction action = null)
+    public IEnumerator MoveTo(Transform target, float speed)
     {
         if (_tween != null && _tween.active) yield break;
 
@@ -40,9 +40,6 @@ public class FishMove : MonoBehaviour
         _tween = transform.DOMove(target.position, speed);
 
         yield return _tween.WaitForCompletion();
-
-        // TODO:コールバックの仕組みが付け焼刃
-        if (action != null) action.Invoke();
     }
 
     /// <summary>ぴちぴちさせる</summary>
