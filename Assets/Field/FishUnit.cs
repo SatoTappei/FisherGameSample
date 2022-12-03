@@ -26,6 +26,9 @@ public class FishUnit : MonoBehaviour , IFloatHitable
     static SODataBase _dataBase;
     static bool _isInited;
 
+    /// <summary>現在釣りあげられているかのフラグ</summary>
+    public bool IsCapture { get; private set; }
+
     IEnumerator Start()
     {
         // 周期がズレるので共通で使うフィールドをセットするだけで消す
@@ -88,15 +91,15 @@ public class FishUnit : MonoBehaviour , IFloatHitable
     public void Fished()
     {
         StartCoroutine(_fishMove.Fished());
+
+        IsCapture = false;
     }
 
     public void HitReceived()
     {
         // ヒットした際にぴちぴちさせる
         StartCoroutine(_fishMove.Captured());
-        
-        // 釣りあげられているので自身を登録する
-        FieldManager fieldManager = new FieldManager();
-        fieldManager.Captured = this;
+
+        IsCapture = true;
     }
 }
