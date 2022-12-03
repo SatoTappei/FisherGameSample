@@ -84,11 +84,19 @@ public class FishUnit : MonoBehaviour , IFloatHitable
         return status;
     }
 
+    /// <summary>釣りあげられた際に呼ばれる処理</summary>
+    public void Fished()
+    {
+        StartCoroutine(_fishMove.Fished());
+    }
+
     public void HitReceived()
     {
-        Debug.Log("ヒットしました");
+        // ヒットした際にぴちぴちさせる
         StartCoroutine(_fishMove.Captured());
-        // ヒットした際の処理を書く
-        // キャラが釣りバトルする際のアニメーションみたいなの
+        
+        // 釣りあげられているので自身を登録する
+        FieldManager fieldManager = new FieldManager();
+        fieldManager.Captured = this;
     }
 }

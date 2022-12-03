@@ -11,9 +11,14 @@ public class FishMove : MonoBehaviour
 {
     Tween _tween;
 
+    /// <summary>釣りあげられた際に魚がアニメーションで移動する位置</summary>
+    static Transform _pivot;
+
     void Start()
     {
-        
+        // 共通かつ重い処理なのでnullチェックする
+        if (_pivot == null)
+            _pivot = GameObject.FindGameObjectWithTag("FishedPivot").transform;
     }
 
     void Update()
@@ -43,10 +48,26 @@ public class FishMove : MonoBehaviour
     /// <summary>ぴちぴちさせる</summary>
     public IEnumerator Captured()
     {
-        // トゥウィーン中ならKillする
+        yield return TweenCoroutine(transform.DOShakePosition(99, 1, 10).SetLoops(-1));
+    }
+
+    /// <summary>逃げる</summary>
+    public IEnumerator Escape()
+    {
+        yield return TweenCoroutine(transform.DOPunchScale(Vector3.zero, 0.5f));
+    }
+
+    /// <summary>釣りあげられる</summary>
+    public IEnumerator Fished()
+    {
+        yield return TweenCoroutine(transform.DOMove(_pivot.position, 0.5f));
+    }
+
+    public IEnumerator TweenCoroutine(Tween tween)
+    {
         if (_tween != null) _tween.Kill();
 
-        _tween = transform.DOShakePosition(99, 1, 10).SetLoops(-1);
+        _tween = tween;
 
         // 後の拡張に対応できるように1フレームの待機を行う
         yield return null;
