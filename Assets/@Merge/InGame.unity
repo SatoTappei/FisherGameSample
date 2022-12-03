@@ -992,10 +992,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloatPivot
       objectReference: {fileID: 0}
-    - target: {fileID: 3950825587099316334, guid: a5709b5262e5d31428146a568e01bd1b, type: 3}
-      propertyPath: m_TagString
-      value: FishedPivot
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a5709b5262e5d31428146a568e01bd1b, type: 3}
 --- !u!4 &1599013790 stripped
