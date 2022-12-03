@@ -24,6 +24,7 @@ public class FishUnit : MonoBehaviour , IFloatHitable
 
     static WayPoints _wayPoints;
     static SODataBase _dataBase;
+    static bool _isInited;
 
     IEnumerator Start()
     {
@@ -32,9 +33,16 @@ public class FishUnit : MonoBehaviour , IFloatHitable
         if (_wayPoints == null || _dataBase == null)
         {
             yield return SetStaticFieldCoroutine();
+            _isInited = true;
         }
         else
         {
+            if (!_isInited)
+            {
+                Destroy(gameObject);
+                yield break;
+            }
+
             Status status = Init();
 
             // ‰æ–Ê’†‰›‚ÉŒü‚¯‚ÄˆÚ“®‚·‚é
