@@ -34,25 +34,9 @@ public class PlayerController : MonoBehaviour
             yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
             go.SetActive(true);
 
-            //Vector3 pos = _camera.ScreenToWorldPoint(Input.mousePosition);
-            //pos.z = 0;
-
-            // クリックされたらその位置に飛ばす
-            //Tween t = go.transform.DOMove(pos, 0.5f);
-            // 指定位置まで来たらコライダーをオンにする
-
             // バトルの決着がついたタイミングで浮きが消えるのでここで待つ
             yield return new WaitUntil(() => !go.activeInHierarchy);
 
-            // ゲージ作成
-            // 0になったときのコールバックと1になったときのコールバックを登録する
-            // UnityEvent…ボタンのやつとか使えないか検討
-
-            // TODO:バトルの流れ
-            // 魚にヒットしたらゲージを表示したい
-            // バトルが終わったらゲージを非表示にしたい
-
-            //t.Kill();
             Debug.Log("浮きが消えました");
         }
         // 浮きの感知範囲に魚が入ったら釣りバトル開始

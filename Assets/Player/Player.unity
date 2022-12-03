@@ -711,6 +711,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0b058b000c464b4e820f908e67230e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gauge: {fileID: 1341956058}
   _floatPrefab: {fileID: 8223762579430805780, guid: 1fbff2d21a27c5a42acf297669ad2b27, type: 3}
   _floatPivot: {fileID: 1778622405}
 --- !u!4 &1778622405 stripped
