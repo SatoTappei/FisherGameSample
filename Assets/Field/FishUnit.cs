@@ -100,6 +100,7 @@ public class FishUnit : MonoBehaviour , IFloatHitable
         IsCapture = false;
     }
 
+    /// <summary>“¦‚°‚ç‚ê‚½Û‚ÉŒÄ‚Î‚ê‚éˆ—</summary>
     public void Escape()
     {
         StartCoroutine(_fishMove.Escape());
