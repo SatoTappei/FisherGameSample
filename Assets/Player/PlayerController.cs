@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
         go.GetComponent<FloatPrefab>().OnHited += () => _gauge.gameObject.SetActive(true);
 
         _gauge.OnWin += GaugeWin;
-        _gauge.OnLose += () => Debug.Log("‚Ü‚¯‚Ü‚µ‚½");
+        _gauge.OnLose += GaugeLose;
 
         while (true)
         {
@@ -62,5 +62,11 @@ public class PlayerController : MonoBehaviour
     {
         FieldManager fm = new FieldManager();
         fm.GetCapture().Fished();
+    }
+
+    void GaugeLose()
+    {
+        FieldManager fm = new FieldManager();
+        fm.GetCapture().Escape();
     }
 }
