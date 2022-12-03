@@ -54,7 +54,7 @@ public class FishMove : MonoBehaviour
     /// <summary>“¦‚°‚é</summary>
     public IEnumerator Escape()
     {
-        yield return TweenCoroutine(transform.DOPunchScale(Vector3.zero, 0.5f));
+        yield return TweenCoroutine(transform.DOScale(Vector3.zero, 0.5f).SetEase(Ease.OutBounce));
     }
 
     /// <summary>’Þ‚è‚ ‚°‚ç‚ê‚é</summary>
