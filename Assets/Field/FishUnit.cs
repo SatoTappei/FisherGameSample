@@ -41,11 +41,17 @@ public class FishUnit : MonoBehaviour , IFloatHitable
         }
         else
         {
+            // SODataBaseの初期セットアップが出来ていなければ自身を削除する
+            // TODO:無駄な処理、やり方が悪い
             if (!_isInited)
             {
                 Destroy(gameObject);
                 yield break;
             }
+
+            // 自身を登録する
+            FieldManager fm = new FieldManager();
+            fm.Add(this);
 
             Status status = Init();
 
